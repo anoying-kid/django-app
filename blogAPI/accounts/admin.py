@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from rest_framework.authtoken.models import Token
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
