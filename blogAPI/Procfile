@@ -1,1 +1,1 @@
-web = python manage.py && guincorn simplex.wsgi
+web = guincorn django_project.wsgi
