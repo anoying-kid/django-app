@@ -119,14 +119,15 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DATABASE_NAME'),
-        'USER': env.str('DATABASE_USER'),
-        'PASSWORD': env.str('DATABASE_PASSWORD'),
-        'HOST': env.str('DATABASE_HOST'),
-        'PORT': env.str('DATABASE_PORT'),
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env.str('DATABASE_NAME'),
+    #     'USER': env.str('DATABASE_USER'),
+    #     'PASSWORD': env.str('DATABASE_PASSWORD'),
+    #     'HOST': env.str('DATABASE_HOST'),
+    #     'PORT': env.str('DATABASE_PORT'),
+    # }
+    'default': env.dj_db_url('DATABASE_URL')
 }
 
 
@@ -183,4 +184,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL  = "accounts.CustomUser"  # new
-CSRF_TRUSTED_ORIGIN = ['http://localhost:8000', 'https://blogapi-django.up.railway.app/']
+CSRF_TRUSTED_ORIGIN = ['http://localhost:8000',]
