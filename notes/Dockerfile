@@ -1,14 +1,16 @@
 # Stage 1: Build React app with Vite
 FROM node:18-alpine as build
-WORKDIR /frontend
+WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ ./
 RUN npm run build
+# Debug: List contents of current directory and dist
+RUN ls -la && ls -la dist
 
 # Stage 2: Setup Django backend
 FROM python:3.10-slim
-WORKDIR /backend
+WORKDIR /app/backend
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -26,7 +28,9 @@ COPY backend/ ./
 RUN mkdir -p staticfiles
 
 # Copy the built React app
-COPY --from=build /frontend/dist ./staticfiles
+COPY --from=build /app/frontend/dist ./staticfiles
+# Debug: List contents of staticfiles
+RUN ls -la staticfiles
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
