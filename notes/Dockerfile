@@ -1,23 +1,28 @@
 # Stage 1: Build React app
 FROM node:18-alpine as build
-
 WORKDIR /app
-
 COPY frontend/package*.json ./
 RUN npm install
-
 COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Setup Django backend
 FROM python:3.10-slim
-
 WORKDIR /app
 
-COPY backend/requirements.txt ./
-RUN pip install -r requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
+# Copy and install Python dependencies
+COPY backend/requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the backend code
 COPY backend/ ./
+
+# Copy the built React app
 COPY --from=build /app/dist ./staticfiles
 
 # Collect static files
