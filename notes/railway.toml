@@ -1,0 +1,10 @@
+[project]
+name = "backend"
+
+[build]
+services = ["web"]
+
+[[services]]
+name = "web"
+type = "web"
+build = "Dockerfile"
