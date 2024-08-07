@@ -1,10 +1,17 @@
 [project]
-name = "backend"
+name = "Notes"
 
 [build]
-services = ["web"]
+services = ["backend", "frontend"]
 
 [[services]]
-name = "web"
+name = "backend"
 type = "web"
-build = "Dockerfile"
+build = "Dockerfile.django"
+port = 8000
+
+[[services]]
+name = "frontend"
+type = "web"
+build = "Dockerfile.vite"
+port = 3000

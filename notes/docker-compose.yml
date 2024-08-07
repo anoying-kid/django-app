@@ -11,11 +11,11 @@ services:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
     environment:
-      PGDATABASE=railway
-      PGUSER=postgres
-      PGPASSWORD=LETOeLWftoEaJxfDiWYXuZICkNFRnYLu
-      PGHOST=viaduct.proxy.rlwy.net
-      PGPORT=19889
+      - PGDATABASE=railway
+      - PGUSER=postgres
+      - PGPASSWORD=LETOeLWftoEaJxfDiWYXuZICkNFRnYLu
+      - PGHOST=viaduct.proxy.rlwy.net
+      - PGPORT=19889
 
   frontend:
     build:
