@@ -1,7 +1,7 @@
 # Dockerfile.django
 FROM python:3.11.1
 
-WORKDIR /app
+WORKDIR /backend
 
 COPY backend/requirements.txt .
 RUN pip install -r requirements.txt
