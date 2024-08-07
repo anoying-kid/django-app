@@ -1,4 +1,4 @@
-# Stage 1: Build React app
+# Stage 1: Build React app with Vite
 FROM node:18-alpine as build
 WORKDIR /app
 COPY frontend/package*.json ./
@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the backend code
 COPY backend/ ./
+
+# Create a directory for static files
+RUN mkdir -p staticfiles
 
 # Copy the built React app
 COPY --from=build /app/dist ./staticfiles
