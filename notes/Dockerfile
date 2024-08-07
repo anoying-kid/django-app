@@ -10,7 +10,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Setup Django backend
-FROM python:3.11.1-slim
+FROM python:3.11.1
 
 WORKDIR /backend
 
