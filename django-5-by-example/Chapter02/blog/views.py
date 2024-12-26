@@ -22,10 +22,20 @@ def post_detail(request, year, month, day, post):
         publish__day=day,
         
     )
+    # List of active comments
+    comment = post.comments.filter(active=True)
+
+    # Form for users to comment
+    form = CommentForm()
+
     return render(
         request,
         'blog/post/detail.html',
-        {'post':post},
+        {
+            'post':post,
+            'comments':comment,
+            'form':form
+        },
     )
 
 def post_share(request, post_id):
